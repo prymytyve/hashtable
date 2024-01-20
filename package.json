@@ -1,8 +1,1 @@
-{"scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "nodemon script.js"   
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  }
-}
+{"scripts":{"start":"nodemon script.mjs"},"devDependencies":{"nodemon":"^3.0.2","webpack":"^5.89.0","webpack-cli":"^5.1.4"}}
