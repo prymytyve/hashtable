@@ -18,6 +18,22 @@ class HashMap {
     }
     return array;
   };
+
+  hash = (key) => {
+    //hash function from https://www.theodinproject.com/lessons/javascript-hashmap-data-structure
+    if (typeof key !== String) return "Not a string";
+    let hashCode = 0;
+    const primeNumber = 31;
+    for (let i = 0; i < key.length; i++) {
+      hashCode = primeNumber * hashCode + key.charCodeAt(i);
+    }
+    const index = hashCode % this._capacity;
+    if (index < 0 || index >= this._capacity) {
+      throw new Error("Trying to access index out of bound");
+    } else {
+      return index;
+    }
+  };
 }
 
 ////////////////////////////////////
