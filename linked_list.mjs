@@ -9,11 +9,11 @@ export class Node {
   }
 }
 
-export class LinkedList {
+export class Bucket {
+  //linked list
   _head = null;
 
   traversal = () => {
-    //make private
     let temp = this._head;
     while (temp._next !== null) {
       temp = temp._next;
@@ -102,6 +102,7 @@ export class LinkedList {
   };
 
   toString = () => {
+    if (this._head === null) return "Empty";
     let temp = this._head;
     let string = "(" + temp._value + ") -> ";
     let i = 0;

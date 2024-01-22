@@ -1,20 +1,25 @@
-import { Node, LinkedList } from "./linked_list.mjs";
+import { Node, Bucket } from "./linked_list.mjs";
 
-const node1 = new Node("a");
-const node2 = new Node("b");
-const node3 = new Node("c");
-const node4 = new Node("d");
-const node5 = new Node("e");
-const node6 = new Node("f");
+class HashMap {
+  constructor() {
+    this._capacity = 4; //change to 16 later
+    this._loadFactor = 0.75;
+    this._array = this.hashMapArr(this._capacity);
+  }
 
-const list = new LinkedList();
+  get array() {
+    return this._array.toString();
+  }
 
-list.append(node1);
-list.append(node2);
-list.prepend(node3);
-list.append(node4);
-list.insertAt(node5, 4);
-list.append(node6);
-list.removeAt(7);
+  hashMapArr = (capacity) => {
+    const array = [];
+    for (let i = 0; i < capacity; i++) {
+      array.push(new Bucket());
+    }
+    return array;
+  };
+}
 
-console.log(list.toString());
+////////////////////////////////////
+const hashMap1 = new HashMap();
+console.log(hashMap1.array);
