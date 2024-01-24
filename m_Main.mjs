@@ -64,17 +64,10 @@ class HashMap {
   };
 
   set = (key, ...value) => {
-    this._itemCounter += 1;
     if (this.sizeCheck() === true) this.dblMapSize(); //checks and increases bucket size
-
-    //only triggers if new node is added
     let index = this.hash(key);
-    console.log(index);
-    //go to this index>traverse> create new node at null
-
     const node = new MapNode(key, ...value);
     this._array[index].add(node);
-    console.log(this._array[index]);
   };
 
   get itemCounter() {
@@ -94,6 +87,18 @@ class HashMap {
   get capacity() {
     return this._capacity;
   }
+
+  get = (key) => {
+    let index = this.hash(key);
+    let i = this._array[index].get(key);
+    return i;
+  };
+
+  has = (key) => {
+    let index = this.hash(key);
+    let i = this._array[index].has(key);
+    return i;
+  };
 }
 
 ////////////////////////////////////
@@ -101,12 +106,12 @@ const hashMap1 = new HashMap();
 hashMap1.set("bob", "42");
 hashMap1.set("Billy", "43");
 hashMap1.set("Boo", "55"); //Boo and Bor cause collisions with Billy
-
 hashMap1.set("jim", "55");
-
 hashMap1.set("jom", "97");
-
 hashMap1.set("jffim", "4");
 hashMap1.set("jom", "1");
-
-console.log(hashMap1.values, hashMap1.total, hashMap1.capacity);
+console.log(
+  // hashMap1.get("bob"),
+  // hashMap1.has("bob"),
+  "ph"
+);

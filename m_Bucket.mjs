@@ -28,7 +28,7 @@ export default class Bucket {
           this.#elementCount += 1;
           return;
         } else {
-          recursion(head._next);
+          navigateList(head._next);
         }
       };
       navigateList(this._head);
@@ -44,5 +44,39 @@ export default class Bucket {
       temp = temp._next;
     }
     return values;
+  };
+
+  get = (key) => {
+    if (this._head === null) {
+      return null;
+    } else {
+      const navigate = (head) => {
+        if (head._key.toLowerCase() === key.toLowerCase()) {
+          return head._value;
+        } else if (head._next === null) {
+          return null;
+        } else {
+          return navigate(head._next);
+        }
+      };
+      return navigate(this._head);
+    }
+  };
+
+  has = (key) => {
+    if (this._head === null) {
+      return false;
+    } else {
+      const navigate = (head) => {
+        if (head._key.toLowerCase() === key.toLowerCase()) {
+          return true;
+        } else if (head._next === null) {
+          return false;
+        } else {
+          return navigate(head._next);
+        }
+      };
+      return navigate(this._head);
+    }
   };
 }
