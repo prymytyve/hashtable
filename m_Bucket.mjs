@@ -14,24 +14,24 @@ export default class Bucket {
     if (this._head === null) {
       this._head = node; //adds new node to as head
       this.#elementCount += 1;
-    } else {
-      const navigateList = (head) => {
-        if (head._key === node._key) {
-          //replaces node
-          let temp = head._next;
-          head = node;
-          head._next = temp;
-          return;
-        } else if (head._next === null) {
-          //adds new node
-          head._next = node;
-          this.#elementCount += 1;
-          return;
-        } else {
-          navigateList(head._next);
-        }
-      };
-      navigateList(this._head);
+    } else if (this._head._key === node._key) {
+      let tempNext = this._head._next;
+      this._head = node;
+      this._head._next = tempNext;
+    } else if (this._head !== null) {
+      let temp = this._head;
+      while (
+        temp._next !== null &&
+        temp._key.toLowerCase() !== node._key.toLowerCase()
+      ) {
+        temp = temp._next;
+      }
+      if (temp._key.toLowerCase() === node._key.toLowerCase()) {
+        temp._value = node._value;
+        return;
+      }
+      temp._next = node;
+      this.#elementCount += 1;
     }
   };
 

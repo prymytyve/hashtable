@@ -30,6 +30,19 @@ class HashMap {
     return this.total / this._capacity >= this._loadFactor;
   };
 
+  bucketSize = (index) => {
+    return this._array[index].count();
+  };
+
+  sizeMap = () => {
+    //creates a visual map of linked lists and amount of elements
+    let total = [];
+    this._array.forEach((bucket) => {
+      total.push(bucket.count);
+    });
+    return total;
+  };
+
   hash = (key) => {
     //hash function from https://www.theodinproject.com/lessons/javascript-hashmap-data-structure
     let hashCode = 0;
@@ -68,6 +81,7 @@ class HashMap {
     let index = this.hash(key);
     const node = new MapNode(key, ...value);
     this._array[index].add(node);
+    // console.log(this._array[index]);
   };
 
   get itemCounter() {
@@ -99,19 +113,36 @@ class HashMap {
     let i = this._array[index].has(key);
     return i;
   };
+
+  remove = (key) => {
+    let index = this.hash(key);
+    let i = this._array[index].remove(key);
+    return i;
+  };
 }
 
 ////////////////////////////////////
 const hashMap1 = new HashMap();
-hashMap1.set("bob", "42");
-hashMap1.set("Billy", "43");
-hashMap1.set("Boo", "55"); //Boo and Bor cause collisions with Billy
-hashMap1.set("jim", "55");
-hashMap1.set("jom", "97");
-hashMap1.set("jffim", "4");
-hashMap1.set("jom", "1");
+hashMap1.set("bob", "bob1");
+hashMap1.set("Billy", "Billy1");
+hashMap1.set("Boo", "Boo1"); //Boo and Bor cause collisions with Billy
+hashMap1.set("jim", "jim1");
+hashMap1.set("jam", "jam1");
+hashMap1.set("jeffrey", "jeffrey1");
+hashMap1.set("bob", "bob2");
+hashMap1.set("Billy", "Billy2");
+hashMap1.set("Boo", "boo2"); //Boo and Bor cause collisions with Billy
+hashMap1.set("Jam", "jam2");
+hashMap1.set("jim", "jim2");
+hashMap1.set("jeffrey", "jeffrey2");
+hashMap1.set("joe", "joe1");
+hashMap1.set("Joe", "joe2");
 console.log(
-  // hashMap1.get("bob"),
+  hashMap1._capacity,
+  hashMap1.total,
+  // hashMap1.sizeMap(),
+  // hashMap1.get("jom"),
   // hashMap1.has("bob"),
-  "ph"
+  // hashMap1.remove("jofff"),
+  hashMap1.values
 );
