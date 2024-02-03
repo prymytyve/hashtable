@@ -84,11 +84,28 @@ class HashMap {
     // console.log(this._array[index]);
   };
 
+  setHashSet = (key) => {
+    if (this.sizeCheck() === true) this.dblMapSize(); //checks and increases bucket size
+    let index = this.hash(key);
+    const node = new SetNode(key);
+    this._array[index].add(node);
+  };
+
   get itemCounter() {
     return this._itemCounter;
   }
 
-  get values() {
+  keys = () => {
+    let arr = [];
+    this._array.forEach((bucket) => {
+      if (bucket._head !== null) {
+        arr = arr.concat(bucket.listKeysInArray());
+      }
+    });
+    return arr;
+  };
+
+  values = () => {
     let arr = [];
     this._array.forEach((bucket) => {
       if (bucket._head !== null) {
@@ -96,7 +113,7 @@ class HashMap {
       }
     });
     return arr;
-  }
+  };
 
   get capacity() {
     return this._capacity;
@@ -119,6 +136,20 @@ class HashMap {
     let i = this._array[index].remove(key);
     return i;
   };
+
+  length = () => {
+    return this.total;
+  };
+
+  entries = () => {
+    let arr = [];
+    this._array.forEach((bucket) => {
+      if (bucket._head !== null) {
+        arr = arr.concat(bucket.listKeyandVal());
+      }
+    });
+    return arr;
+  };
 }
 
 ////////////////////////////////////
@@ -136,13 +167,21 @@ hashMap1.set("Jam", "jam2");
 hashMap1.set("jim", "jim2");
 hashMap1.set("jeffrey", "jeffrey2");
 hashMap1.set("joe", "joe1");
-hashMap1.set("Joe", "joe2");
+hashMap1.set("Joe", "joe2", "jay");
+hashMap1.setHashSet("Sarah");
+hashMap1.setHashSet("Sar");
+hashMap1.setHashSet("Sir");
 console.log(
-  hashMap1._capacity,
-  hashMap1.total,
+  // hashMap1._capacity,
+  // hashMap1.total,
   // hashMap1.sizeMap(),
-  // hashMap1.get("jom"),
-  // hashMap1.has("bob"),
-  // hashMap1.remove("jofff"),
-  hashMap1.values
+  // hashMap1.get("sarah"),
+  // hashMap1.has("sarah"),
+  // hashMap1.remove("bob"),
+  // hashMap1.remove("Sir"),
+  // hashMap1.total
+  // hashMap1.length()
+  // hashMap1.keys()
+  // hashMap1.values(),
+  hashMap1.entries()
 );
